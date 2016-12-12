@@ -1,6 +1,6 @@
 # VoiceRecognition
 
-#GET THE SENCE OF THE SENDING MESSAGE
+#GET THE SENCE OF THE SENDING MESSAGE 1
 curl \
    -H 'Authorization: Bearer O2UYDHYINQY6LL3RWLGKQAAISU3SVR3I' \
    'https://api.wit.ai/message?v=20161212&q=Bonjour%20Fortunat'
@@ -23,7 +23,7 @@ Response:
   }
 }
 
-#GET THE RESPONSE OF THE BOT
+#GET THE SENCE OF THE SENDING MESSAGE 2
 curl -XGET "https://api.wit.ai/message?v=2016056&q=Quel%20temps%20fait-t-il%20aujourd'hui%20à%20Paris?"\
 -H 'Authorization: Bearer O2UYDHYINQY6LL3RWLGKQAAISU3SVR3I'
 
@@ -48,6 +48,33 @@ Response:
       "value" : "meteo"
     } ]
   }
+
+#GET THE NEXT STEP OF THE BOT
+curl -XPOST "https://api.wit.ai/converse?v=20160526&session_id=123abc&q=Quel%20temps%20il%20fait%20aujourd'hui%20à%20Paris?"       -H 'Authorization: Bearer O2UYDHYINQY6LL3RWLGKQAAISU3SVR3I' 
+
+Response:
+{
+  "confidence" : 1,
+  "type" : "action",
+  "action" : "getMoment",
+  "entities" : {
+    "date" : [ {
+      "confidence" : 0.8642191390402474,
+      "type" : "value",
+      "value" : "aujourd'hui "
+    } ],
+    "location" : [ {
+      "confidence" : 0.9739053621078438,
+      "type" : "value",
+      "value" : "Paris",
+      "suggested" : true
+    } ],
+    "intent" : [ {
+      "confidence" : 0.9770314815947994,
+      "value" : "meteo"
+    } ]
+  }
+}
 
 #GET ALL THE ENTITIES OF THE APP
 curl -XGET 'https://api.wit.ai/entities?v=20160526' \
